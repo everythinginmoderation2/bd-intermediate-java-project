@@ -1,0 +1,112 @@
+@startuml
+'https://plantuml.com/class-diagram'
+
+interface ReadOnlyDAO
+
++class Order {
+    +String orderId
+    +getters()
+    +setters()
+    +{static} class Builder()
+}
+
++class OrderItem {
+    -String customerOrderItemId
+    -String orderId
+    +getters()
+    +setters()
+    +{static} class Builder()
+}
+
++class Promise {
+    -String customerOrderItemId
+    -ZonedDateTime promiseLatestShipDate
+    +getters()
+    +setters()
+    +{static} class Builder()
+}
+
++class PromiseHistory {
+    -Order order
+    -List<Promise> promises
+    +PromiseHistory(Order order)
+    +Order getOrder()
+    +void addPromise(Promise newPromise)
+    +List<Promise> getPromises()
+}
+
++class PromiseHistoryClient {
+    --fields--
+    -GetPromiseHistoryByOrderIdActivity getPromiseHistoryByOrderIdActivity
+    --methods--
+    +PromiseHistoryClient(GetPromiseHistoryByOrderIdActivity getPromiseHistoryByOrderIdActivity)
+    +PromiseHistory getPromiseHistoryByOrderId(String orderId)
+}
+
++class GetPromiseHistoryByOrderIdActivity {
+    --fields--
+    -ReadOnlyDAO orderDao
+    -ReadOnlyDAO promiseDao
+    --methods--
+    +GetPromiseHistoryByOrderIdActivity(ReadOnlyDAO orderDao, ReadOnlyDAO PromiseDao)
+    +GetPromiseHistoryByOrderId(String orderId)
+}
+
++class OrderDAO {
+    --fields--
+    -OrderManipulationAuthorityClient
+    --methods--
+    +OrderDAO(OrderManipulationAuthorityClient client)
+    +Order get(String orderId)
+    +OrderItem convertToOrderItem(OrderResultItem orderResultItem)
+}
+
++class PromiseDAO {
+    --fields--
+    -DeliveryPromiseServiceClient dpsclient
+    -OrderManipulationAuthorityClient omaClient
+    --methods--
+    +PromiseDAO(DPSC dpsClient, OMAC omaClient)
+    +List<Promise> get(String customerOrderItemId)
+    -ZonedDateTime getDeliveryDateForOrderItem(String customerOrderItemId)
+}
+
++class OrderManipulationAuthorityClient {
+    --fields--
+    -OrderManipulationAuthority omaService
+    --methods--
+    +OrderManipulationAuthorityClient(OrderManipulationAuthority service)
+    +OrderResult getCustomerOrderByOrderId(String orderId)
+    +OrderResultItem getCustomerOrderItemByOrderItemId(String orderItemId)
+}
+
++class DeliveryPromiseServiceClient {
+    --fields--
+    -DeliveryPromiseService dpService
+    --methods--
+    +DeliveryPromiseServiceClient(DeliveryPromiseService dpService)
+    +Promise getDeliveryPromiseByOrderItemId(String (String customerOrderItemId)
+}
+
+Order *-- OrderItem
+PromiseHistory -o Order
+PromiseHistory *-- Promise
+OrderItem - Promise
+
+OrderDAO o-- Order
+
+OrderDAO ..|> ReadOnlyDAO
+PromiseDAO ..|> ReadOnlyDAO
+
+PromiseDAO --* Promise
+
+DeliveryPromiseServiceClient o-- PromiseDAO
+
+
+GetPromiseHistoryByOrderIdActivity -- PromiseHistoryClient
+PromiseHistoryClient o-- PromiseHistory
+
+GetPromiseHistoryByOrderIdActivity --o OrderDAO
+OrderManipulationAuthorityClient o-- OrderDAO
+
+@enduml
