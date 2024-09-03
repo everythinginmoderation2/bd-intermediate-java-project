@@ -36,9 +36,6 @@ public class Shell {
     private PromiseHistoryClient promiseHistoryClient;
     private ATAUserHandler inputHandler;
 
-    // FIXME: Added to cause a problem with Spotbug
-    private String unusedPrivateString;
-
     /**
      * Constructs a Shell instance that will use the given service client.
      *
