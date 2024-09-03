@@ -3,6 +3,18 @@
 
 interface ReadOnlyDao
 
++class App {
+    +PromiseHistoryClient getPromiseHistoryClient()
+    +GetPromiseHistoryByOrderIdActivity getPromiseHistoryByOrderIdActivity()
+    +OrderDao getOrderDao()
+    +PromiseDao getPromiseDao()
+    +OrderManipulationAuthorityClient getOrderManipulationAuthorityClient()
+    +DeliveryPromiseServiceClient getDeliveryPromiseServiceClient()
+    +OrderManipulationAuthority getOrderManipulationAuthority()
+    +DeliveryPromiseService getDeliveryPromiseService()
+    +OrderDatastore getOrderDatastore()
+}
+
 +class Order {
     +String orderId
     +getters()
@@ -95,9 +107,13 @@ interface ReadOnlyDao
 
 
 PromiseHistoryClient --o GetPromiseHistoryByOrderIdActivity
-DeliveryPromiseServiceClient --o OrderDAO
 GetPromiseHistoryByOrderIdActivity --o PromiseDAO
 GetPromiseHistoryByOrderIdActivity --o OrderDAO
-OrderManipulationAuthorityClient --o OrderDAO
+ PromiseDao o-- DeliveryPromiseServiceClient
+ PromiseDao o-- OrderManipulationAuthorityClient
+ OrderDao o-- OrderManipulationAuthorityClient
+ PromiseHistory --o Order
+ PromiseHistory --o Promise
+ Order --o OrderItem
 
 @enduml
