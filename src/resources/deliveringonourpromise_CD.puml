@@ -52,7 +52,7 @@ interface ReadOnlyDao
     +GetPromiseHistoryByOrderId(String orderId)
 }
 
-+class OrderDAO {
++class OrderDao {
     --fields--
     -OrderManipulationAuthorityClient
     --methods--
@@ -61,7 +61,7 @@ interface ReadOnlyDao
     +OrderItem convertToOrderItem(OrderResultItem orderResultItem)
 }
 
-+class PromiseDAO {
++class PromiseDao {
     --fields--
     -DeliveryPromiseServiceClient dpsclient
     -OrderManipulationAuthorityClient omaClient
