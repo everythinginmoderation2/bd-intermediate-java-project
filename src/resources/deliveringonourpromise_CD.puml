@@ -88,25 +88,16 @@ interface ReadOnlyDAO
     +Promise getDeliveryPromiseByOrderItemId(String (String customerOrderItemId)
 }
 
-Order *-- OrderItem
-PromiseHistory -o Order
-PromiseHistory *-- Promise
-OrderItem - Promise
-
-OrderDAO o-- Order
-
-OrderDAO ..|> ReadOnlyDAO
-PromiseDAO ..|> ReadOnlyDAO
-
-PromiseDAO --* Promise
-
-DeliveryPromiseServiceClient o-- PromiseDAO
 
 
-GetPromiseHistoryByOrderIdActivity -- PromiseHistoryClient
-PromiseHistoryClient o-- PromiseHistory
 
+
+
+
+PromiseHistoryClient --o GetPromiseHistoryByOrderIdActivity
+DeliveryPromiseServiceClient --o OrderDAO
+GetPromiseHistoryByOrderIdActivity --o PromiseDAO
 GetPromiseHistoryByOrderIdActivity --o OrderDAO
-OrderManipulationAuthorityClient o-- OrderDAO
+OrderManipulationAuthorityClient --o OrderDAO
 
 @enduml

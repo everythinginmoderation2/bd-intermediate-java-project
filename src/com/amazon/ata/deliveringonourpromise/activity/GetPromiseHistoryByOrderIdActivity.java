@@ -40,7 +40,10 @@ public class GetPromiseHistoryByOrderIdActivity {
         }
 
         Order order = orderDao.get(orderId);
-
+        //FIX ME
+        if (order == null) {
+            throw new NullPointerException("Order ID does not have any orders associated. Please try a different Id.");
+        }
         List<OrderItem> customerOrderItems = order.getCustomerOrderItemList();
         OrderItem customerOrderItem = null;
         if (customerOrderItems != null && !customerOrderItems.isEmpty()) {

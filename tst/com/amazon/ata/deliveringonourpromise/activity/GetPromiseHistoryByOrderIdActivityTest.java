@@ -32,6 +32,20 @@ public class GetPromiseHistoryByOrderIdActivityTest {
         activity = new GetPromiseHistoryByOrderIdActivity(orderDao, promiseDao);
     }
 
+    //Use the order Id listed below in order to test
+    //EXISTS 111-7497023-2960776
+    //NON-EXISTENT && SHOULD BE NULL 111-749023-7630574
+    @Test
+    public void getPromiseHistoryByOrderId_nullOrderFromOrderId_throwsNullPointerException() {
+        //GIVEN
+        String orderId = "111-749023-7630574";
+
+        // WHEN + THEN
+        assertThrows(NullPointerException.class, () -> activity.getPromiseHistoryByOrderId(orderId));
+    }
+
+
+
     @Test
     public void getPromiseHistoryByOrderId_nullOrderId_isRejected() {
         // GIVEN

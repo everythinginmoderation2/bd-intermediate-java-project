@@ -50,26 +50,22 @@ public class Shell {
         this.inputHandler = userHandler;
     }
 
-    // FIXME: I need some code to mess up Checkstyle. I put opening braces on their own line
+    //     *FIXED*: I need some code to mess up Checkstyle. I put opening braces on their own line
     /**
      * Command Line Interface entry point. Arguments are ignored.
      *
      * @param args command line args (ignored).
      * */
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Shell shell = new Shell(App.getPromiseHistoryClient(), new ATAUserHandler());
         shell.processCommandLineArgs(args);
 
-        try
-        {
-            do
-            {
+        try {
+            do {
                 System.out.println(shell.handleUserRequest());
             } while (shell.userHasAnotherRequest());
-        } catch (Exception e)
-        {
-            System.out.println("Error encountered. Exiting.");
+        } catch (Exception e) {
+            System.out.print("Order does not exist. Please try different order ID. \n\n");
         }
 
         System.out.println("Thank you for using the Promise History CLI. Have a great day!\n\n");
