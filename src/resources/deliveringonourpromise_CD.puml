@@ -115,6 +115,6 @@ OrderDao o-- OrderManipulationAuthorityClient
 PromiseHistory o-- Order
 PromiseHistory o-- Promise
 Order o-- OrderItem
-OrderDao o-- ReadOnlyDao
+OrderDao --|> ReadOnlyDao
 
 @enduml
