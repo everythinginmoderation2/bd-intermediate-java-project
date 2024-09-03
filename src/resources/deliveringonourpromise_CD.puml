@@ -106,14 +106,14 @@ interface ReadOnlyDao
 
 
 
-PromiseHistoryClient --o GetPromiseHistoryByOrderIdActivity
+PromiseHistoryClient o-- GetPromiseHistoryByOrderIdActivity
 GetPromiseHistoryByOrderIdActivity --o PromiseDAO
 GetPromiseHistoryByOrderIdActivity --o OrderDAO
- PromiseDao o-- DeliveryPromiseServiceClient
- PromiseDao o-- OrderManipulationAuthorityClient
- OrderDao o-- OrderManipulationAuthorityClient
- PromiseHistory --o Order
- PromiseHistory --o Promise
- Order --o OrderItem
+PromiseDao o-- DeliveryPromiseServiceClient
+PromiseDao o-- OrderManipulationAuthorityClient
+OrderDao o-- OrderManipulationAuthorityClient
+PromiseHistory --o Order
+PromiseHistory --o Promise
+Order --o OrderItem
 
 @enduml
