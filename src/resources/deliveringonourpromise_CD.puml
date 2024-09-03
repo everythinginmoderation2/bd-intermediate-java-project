@@ -107,8 +107,8 @@ interface ReadOnlyDao
 
 
 PromiseHistoryClient o-- GetPromiseHistoryByOrderIdActivity
-GetPromiseHistoryByOrderIdActivity --o PromiseDAO
-GetPromiseHistoryByOrderIdActivity --o OrderDAO
+GetPromiseHistoryByOrderIdActivity --o PromiseDao
+GetPromiseHistoryByOrderIdActivity --o OrderDao
 PromiseDao o-- DeliveryPromiseServiceClient
 PromiseDao o-- OrderManipulationAuthorityClient
 OrderDao o-- OrderManipulationAuthorityClient
