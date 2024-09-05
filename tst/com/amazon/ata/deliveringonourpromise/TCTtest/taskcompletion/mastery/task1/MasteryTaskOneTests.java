@@ -25,8 +25,9 @@ public class MasteryTaskOneTests {
     @Test
     public void masteryTaskOne_missedPromiseCli_resolvesCSIssue() {
         // GIVEN
-        String nonExistentOrderId = "900-0000000-0000000";
-//        String nonExistentOrderId = "111-749023-7630574";
+//        String nonExistentOrderId = "900-0000000-0000000";
+        String nonExistentOrderId = "111-749023-7630574";
+//        String ExistentOrderId = "111-7497023-2960775";
 
         // WHEN
         PromiseHistory promiseHistory = null;

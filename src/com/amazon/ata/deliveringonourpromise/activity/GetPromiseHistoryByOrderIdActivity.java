@@ -6,6 +6,7 @@ import com.amazon.ata.deliveringonourpromise.types.OrderItem;
 import com.amazon.ata.deliveringonourpromise.types.Promise;
 import com.amazon.ata.deliveringonourpromise.types.PromiseHistory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,10 +41,10 @@ public class GetPromiseHistoryByOrderIdActivity {
         }
 
         Order order = orderDao.get(orderId);
-
         if (order == null) {
-            throw new NullPointerException("Order ID does not have any orders associated. Please try a different Id.");
+            return new PromiseHistory(null);
         }
+
         List<OrderItem> customerOrderItems = order.getCustomerOrderItemList();
         OrderItem customerOrderItem = null;
         if (customerOrderItems != null && !customerOrderItems.isEmpty()) {
