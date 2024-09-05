@@ -6,7 +6,6 @@ import com.amazon.ata.deliveringonourpromise.types.OrderItem;
 import com.amazon.ata.deliveringonourpromise.types.Promise;
 import com.amazon.ata.deliveringonourpromise.types.PromiseHistory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
