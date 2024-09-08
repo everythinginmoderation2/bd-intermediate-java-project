@@ -28,8 +28,8 @@ public class OrderDaoTest {
     }
 
     @Test
-    //Verifying that OrderDao returns an appropriate response when given orderId doesn't exist
-    public void get_forUnknownOrderId_returnsNullOrder() {
+    //Verifying that OrderDao returns a null order if the order cannot be found
+    public void get_orderCannotBeFound_returnsNullOrder() {
         //Given
         //An order ID that doesn't exist
         String orderId = "chicken";
@@ -39,7 +39,7 @@ public class OrderDaoTest {
 
         //Then
         //A null order is returned
-        assertNull(result, "This orderId does not exist");
+        assertNull(result, "This order is null");
     }
 
 

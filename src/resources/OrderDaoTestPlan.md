@@ -39,3 +39,17 @@ Happy case, verifying that the OrderDao can return an order.
 
 ### Then
 * The result is not null
+
+
+
+### get_orderCannotBeFound_returnsNullOrder
+Here is an alternate case, verifying that OrderDao can return a null order.
+
+#### Given
+* An order ID that doesn't have any orders associated with it
+
+#### When
+1. We call `get()` with that order ID
+
+### Then
+* The result is null
