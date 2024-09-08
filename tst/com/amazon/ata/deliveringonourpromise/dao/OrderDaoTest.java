@@ -27,6 +27,21 @@ public class OrderDaoTest {
         assertNotNull(result, "An existing order should be returned.");
     }
 
+    @Test
+    //Verifying that OrderDao returns an appropriate response when given orderId doesn't exist
+    public void get_forUnknownOrderId_returnsNullOrder() {
+        //Given
+        //An order ID that doesn't exist
+        String orderId = "chicken";
+
+        //When
+        Order result = dao.get(orderId);
+
+        //Then
+        //A null order is returned
+        assertNull(result, "This orderId does not exist");
+    }
+
 
 }
 
