@@ -11,8 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -32,16 +31,19 @@ public class GetPromiseHistoryByOrderIdActivityTest {
         activity = new GetPromiseHistoryByOrderIdActivity(orderDao, promiseDao);
     }
 
-    //Use the order Id listed below in order to test
-    //EXISTS 111-7497023-2960776
-    //NON-EXISTENT && SHOULD BE NULL 111-749023-7630574
+    //Use the order Ids listed below in to test existing orderId's against non-existent orderId's
+    //EXISTS: 111-7497023-2960776
+    //NON-EXISTENT && SHOULD BE NULL: 111-749023-7630574
     @Test
-    public void getPromiseHistoryByOrderId_nullOrderFromOrderId_throwsNullPointerException() {
+    public void getPromiseHistoryByOrderId_nullOrderFromOrderId_returnsPromiseHistoryWithNoPromises() {
         //GIVEN
         String orderId = "111-749023-7630574";
 
-        // WHEN + THEN
-        assertThrows(NullPointerException.class, () -> activity.getPromiseHistoryByOrderId(orderId));
+        // WHEN
+        PromiseHistory history = activity.getPromiseHistoryByOrderId(orderId);
+
+        // THEN
+        assertEquals(0, history.getPromises().size(), "Expects null order to have no promise history");
     }
 
 
