@@ -71,9 +71,9 @@ public class Order {
      * @return a list containing all of the order items in this order
      */
     public List<OrderItem> getCustomerOrderItemList() {
-            List<OrderItem> copy = new ArrayList<>(customerOrderItemList.size());
-            copy.addAll(customerOrderItemList);
-            return copy;
+        List<OrderItem> copy = new ArrayList<>(customerOrderItemList.size());
+        copy.addAll(customerOrderItemList);
+        return copy;
     }
 
     public String getShipOption() {
