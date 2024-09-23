@@ -1,6 +1,8 @@
 package com.amazon.ata.deliveringonourpromise.dao;
 
+import com.amazon.ata.deliveringonourpromise.PromiseClient;
 import com.amazon.ata.deliveringonourpromise.deliverypromiseservice.DeliveryPromiseServiceClient;
+import com.amazon.ata.deliveringonourpromise.orderfulfillmentservice.OrderFulfillmentServiceClient;
 import com.amazon.ata.deliveringonourpromise.ordermanipulationauthority.OrderManipulationAuthorityClient;
 import com.amazon.ata.deliveringonourpromise.types.Promise;
 import com.amazon.ata.ordermanipulationauthority.OrderResult;
@@ -17,15 +19,23 @@ import java.util.List;
 public class PromiseDao implements ReadOnlyDao<String, List<Promise>> {
     private DeliveryPromiseServiceClient dpsClient;
     private OrderManipulationAuthorityClient omaClient;
+    private OrderFulfillmentServiceClient ofsClient;
 
     /**
-     * PromiseDao constructor, accepting service clients for DPS and OMA.
+     * PromiseDao constructor, accepting service clients for DPS, OMA and OFS.
      * @param dpsClient DeliveryPromiseServiceClient for DAO to access DPS
      * @param omaClient OrderManipulationAuthorityClient for DAO to access OMA
+     * @param ofsClient OrderFulfillmentServiceClient for DAO to access OFS
      */
-    public PromiseDao(DeliveryPromiseServiceClient dpsClient, OrderManipulationAuthorityClient omaClient) {
+    public PromiseDao(DeliveryPromiseServiceClient dpsClient,
+                      OrderManipulationAuthorityClient omaClient,
+                      OrderFulfillmentServiceClient ofsClient) {
         this.dpsClient = dpsClient;
         this.omaClient = omaClient;
+        this.ofsClient = ofsClient;
+    }
+
+    public PromiseDao(OrderManipulationAuthorityClient omaClient, List<PromiseClient> promiseClients) {
     }
 
     /**

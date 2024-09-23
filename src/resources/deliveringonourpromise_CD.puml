@@ -66,7 +66,7 @@ interface ReadOnlyDao
 
 +class OrderDao {
     --fields--
-    -OrderManipulationAuthorityClient
+    -OrderManipulationAuthorityClient omaClient
     --methods--
     +OrderDAO(OrderManipulationAuthorityClient client)
     +Order get(String orderId)
@@ -78,7 +78,7 @@ interface ReadOnlyDao
     -DeliveryPromiseServiceClient dpsclient
     -OrderManipulationAuthorityClient omaClient
     --methods--
-    +PromiseDAO(DPSC dpsClient, OMAC omaClient)
+    +PromiseDAO (DPSC dpsClient, OMAC omaClient)
     +List<Promise> get(String customerOrderItemId)
     -ZonedDateTime getDeliveryDateForOrderItem(String customerOrderItemId)
 }
@@ -97,7 +97,7 @@ interface ReadOnlyDao
     -DeliveryPromiseService dpService
     --methods--
     +DeliveryPromiseServiceClient(DeliveryPromiseService dpService)
-    +Promise getDeliveryPromiseByOrderItemId(String (String customerOrderItemId)
+    +Promise getDeliveryPromiseByOrderItemId(String customerOrderItemId)
 }
 
 

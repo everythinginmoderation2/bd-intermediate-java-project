@@ -35,7 +35,7 @@ public class MasteryTaskFourTests {
         // GIVEN
         Class<?> ofsClientClass =
             ClassQuery.inExactPackage("com.amazon.ata.deliveringonourpromise.orderfulfillmentservice")
-            .withExactSimpleName("OrderFulfillmentServiceClient")
+            .withExactSimpleName("com.amazon.ata.deliveringonourpromise.orderfulfillmentservice.OrderFulfillmentServiceClient")
             .findClassOrFail();
 
         // WHEN
@@ -44,15 +44,15 @@ public class MasteryTaskFourTests {
             .toArray(Method[]::new);
 
         // THEN
-        assertTrue(1 == publicMethods.length, "Expected OrderFulfillmentServiceClient to have a single public method!");
+        assertTrue(1 == publicMethods.length, "Expected com.amazon.ata.deliveringonourpromise.orderfulfillmentservice.OrderFulfillmentServiceClient to have a single public method!");
 
         Class<?> ofsMethodReturnType = publicMethods[0].getReturnType();
         assertTrue(ofsMethodReturnType == Promise.class,
-            "Expected OrderFulfillmentServiceClient public method to have Promise as return type!");
+            "Expected com.amazon.ata.deliveringonourpromise.orderfulfillmentservice.OrderFulfillmentServiceClient public method to have Promise as return type!");
 
         Class<?>[] ofsMethodParameterTypes = publicMethods[0].getParameterTypes();
         assertTrue(1 == ofsMethodParameterTypes.length && ofsMethodParameterTypes[0] == String.class,
-            "Expected OrderFulfillmentServiceClient public method to take single parameter of String type!");
+            "Expected com.amazon.ata.deliveringonourpromise.orderfulfillmentservice.OrderFulfillmentServiceClient public method to take single parameter of String type!");
     }
 
     @Test
@@ -84,7 +84,7 @@ public class MasteryTaskFourTests {
         // GIVEN
         Class<?> ofsClientClass =
             ClassQuery.inExactPackage("com.amazon.ata.deliveringonourpromise.orderfulfillmentservice")
-                .withExactSimpleName("OrderFulfillmentServiceClient")
+                .withExactSimpleName("com.amazon.ata.deliveringonourpromise.orderfulfillmentservice.OrderFulfillmentServiceClient")
                 .findClassOrFail();
 
         Class<?> dpsClientClass = DeliveryPromiseServiceClient.class;
@@ -124,7 +124,7 @@ public class MasteryTaskFourTests {
         try {
             promiseHistory = client.getPromiseHistoryByOrderId(orderId);
         } catch (Exception e) {
-            fail("Expected OrderFulfillmentServiceClient to not throw an exception when retrieving order: " +
+            fail("Expected com.amazon.ata.deliveringonourpromise.orderfulfillmentservice.OrderFulfillmentServiceClient to not throw an exception when retrieving order: " +
                 orderId);
         }
 
@@ -136,7 +136,7 @@ public class MasteryTaskFourTests {
             }
         }
         assertTrue(providedByOfs,
-            "Expected OrderFulfillmentServiceClient to provide promise from OrderFulfillmentService for order: " +
+            "Expected com.amazon.ata.deliveringonourpromise.orderfulfillmentservice.OrderFulfillmentServiceClient to provide promise from OrderFulfillmentService for order: " +
             orderId);
     }
 }
