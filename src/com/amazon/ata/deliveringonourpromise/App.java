@@ -11,7 +11,6 @@ import com.amazon.ata.deliveringonourpromise.promisehistoryservice.PromiseHistor
 import com.amazon.ata.deliverypromiseservice.service.DeliveryPromiseService;
 import com.amazon.ata.orderfulfillmentservice.OrderFulfillmentService;
 import com.amazon.ata.ordermanipulationauthority.OrderManipulationAuthority;
-import com.google.common.util.concurrent.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +41,11 @@ public class App {
     public static OrderDao getOrderDao() {
         return new OrderDao(getOrderManipulationAuthorityClient());
     }
+
+    /**
+     * Constructs, and Fetches a new promiseDao
+     * @return PromiseDAO (omaClient, List<promiseClient>)
+     */
     public static PromiseDao getPromiseDao() {
         List<PromiseClient> promiseClients = new ArrayList<>();
         promiseClients.add(getDeliveryPromiseServiceClient());
