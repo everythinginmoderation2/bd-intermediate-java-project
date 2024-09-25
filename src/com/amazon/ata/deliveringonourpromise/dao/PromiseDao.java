@@ -17,25 +17,13 @@ import java.util.List;
  * DAO implementation for Promises.
  */
 public class PromiseDao implements ReadOnlyDao<String, List<Promise>> {
-    private DeliveryPromiseServiceClient dpsClient;
     private OrderManipulationAuthorityClient omaClient;
-    private OrderFulfillmentServiceClient ofsClient;
+    private List<PromiseClient> promiseClients = new ArrayList<>();
 
-    /**
-     * PromiseDao constructor, accepting service clients for DPS, OMA and OFS.
-     * @param dpsClient DeliveryPromiseServiceClient for DAO to access DPS
-     * @param omaClient OrderManipulationAuthorityClient for DAO to access OMA
-     * @param ofsClient OrderFulfillmentServiceClient for DAO to access OFS
-     */
-    public PromiseDao(DeliveryPromiseServiceClient dpsClient,
-                      OrderManipulationAuthorityClient omaClient,
-                      OrderFulfillmentServiceClient ofsClient) {
-        this.dpsClient = dpsClient;
-        this.omaClient = omaClient;
-        this.ofsClient = ofsClient;
-    }
 
     public PromiseDao(OrderManipulationAuthorityClient omaClient, List<PromiseClient> promiseClients) {
+        this.omaClient = omaClient;
+        this.promiseClients.addAll(promiseClients);
     }
 
     /**
@@ -52,10 +40,12 @@ public class PromiseDao implements ReadOnlyDao<String, List<Promise>> {
 
         // fetch Promise from Delivery Promise Service. If exists, add to list of Promises to return.
         // Set delivery date
-        Promise dpsPromise = dpsClient.getDeliveryPromiseByOrderItemId(customerOrderItemId);
-        if (dpsPromise != null) {
-            dpsPromise.setDeliveryDate(itemDeliveryDate);
-            promises.add(dpsPromise);
+        for (PromiseClient promiseClient : promiseClients) {
+            Promise promise = promiseClient.getDeliveryPromiseByOrderItemId(customerOrderItemId);
+            if (promise != null) {
+                promise.setDeliveryDate(itemDeliveryDate);
+                promises.add(promise);
+            }
         }
 
         return promises;

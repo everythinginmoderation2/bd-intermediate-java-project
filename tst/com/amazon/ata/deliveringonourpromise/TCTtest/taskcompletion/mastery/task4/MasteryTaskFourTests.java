@@ -6,7 +6,6 @@ import com.amazon.ata.deliveringonourpromise.deliverypromiseservice.DeliveryProm
 import com.amazon.ata.deliveringonourpromise.promisehistoryservice.PromiseHistoryClient;
 import com.amazon.ata.deliveringonourpromise.types.Promise;
 import com.amazon.ata.deliveringonourpromise.types.PromiseHistory;
-import com.amazon.ata.test.helper.AtaTestHelper;
 import com.amazon.ata.test.reflect.ClassQuery;
 
 import org.testng.annotations.BeforeMethod;
@@ -18,7 +17,6 @@ import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
@@ -35,7 +33,7 @@ public class MasteryTaskFourTests {
         // GIVEN
         Class<?> ofsClientClass =
             ClassQuery.inExactPackage("com.amazon.ata.deliveringonourpromise.orderfulfillmentservice")
-            .withExactSimpleName("com.amazon.ata.deliveringonourpromise.orderfulfillmentservice.OrderFulfillmentServiceClient")
+            .withExactSimpleName("OrderFulfillmentServiceClient")
             .findClassOrFail();
 
         // WHEN
@@ -84,7 +82,7 @@ public class MasteryTaskFourTests {
         // GIVEN
         Class<?> ofsClientClass =
             ClassQuery.inExactPackage("com.amazon.ata.deliveringonourpromise.orderfulfillmentservice")
-                .withExactSimpleName("com.amazon.ata.deliveringonourpromise.orderfulfillmentservice.OrderFulfillmentServiceClient")
+                .withExactSimpleName("OrderFulfillmentServiceClient")
                 .findClassOrFail();
 
         Class<?> dpsClientClass = DeliveryPromiseServiceClient.class;

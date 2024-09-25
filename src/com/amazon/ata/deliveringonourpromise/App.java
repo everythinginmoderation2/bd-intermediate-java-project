@@ -11,6 +11,10 @@ import com.amazon.ata.deliveringonourpromise.promisehistoryservice.PromiseHistor
 import com.amazon.ata.deliverypromiseservice.service.DeliveryPromiseService;
 import com.amazon.ata.orderfulfillmentservice.OrderFulfillmentService;
 import com.amazon.ata.ordermanipulationauthority.OrderManipulationAuthority;
+import com.google.common.util.concurrent.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Provides inversion of control for the DeliveringOnOurPromise project by instantiating all of the
@@ -39,9 +43,10 @@ public class App {
         return new OrderDao(getOrderManipulationAuthorityClient());
     }
     public static PromiseDao getPromiseDao() {
-        return new PromiseDao(getDeliveryPromiseServiceClient(),
-                              getOrderManipulationAuthorityClient(),
-                getOrderFulfillmentServiceClient()
+        List<PromiseClient> promiseClients = new ArrayList<>();
+        promiseClients.add(getDeliveryPromiseServiceClient());
+        promiseClients.add(getOrderFulfillmentServiceClient());
+        return new PromiseDao(getOrderManipulationAuthorityClient(), promiseClients
         );
     }
 
