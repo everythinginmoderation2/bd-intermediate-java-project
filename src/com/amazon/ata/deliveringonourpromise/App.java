@@ -43,8 +43,8 @@ public class App {
     }
 
     /**
-     * Constructs, and Fetches a new promiseDao
-     * @return PromiseDAO (omaClient, List<promiseClient>)
+     * Constructs, and Fetches a new promiseDao.
+     * @return PromiseDAO (omaClient, promiseClients)
      */
     public static PromiseDao getPromiseDao() {
         List<PromiseClient> promiseClients = new ArrayList<>();

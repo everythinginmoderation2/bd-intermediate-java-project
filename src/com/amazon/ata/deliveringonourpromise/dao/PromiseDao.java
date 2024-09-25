@@ -19,9 +19,9 @@ public class PromiseDao implements ReadOnlyDao<String, List<Promise>> {
     private List<PromiseClient> promiseClients = new ArrayList<>();
 
     /**
-     * Constructor that allows other files to make and use new promiseDAOs and its methods
+     * Constructor that allows other files to make and use new promiseDAOs and its methods.
      * @param omaClient The client used to make calls to the omaService
-     * @param promiseClients
+     * @param promiseClients  The list of promise clients
      */
     public PromiseDao(OrderManipulationAuthorityClient omaClient, List<PromiseClient> promiseClients) {
         this.omaClient = omaClient;
