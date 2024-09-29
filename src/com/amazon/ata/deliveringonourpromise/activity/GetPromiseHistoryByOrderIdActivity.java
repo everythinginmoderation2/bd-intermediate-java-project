@@ -1,5 +1,6 @@
 package com.amazon.ata.deliveringonourpromise.activity;
 
+import com.amazon.ata.deliveringonourpromise.comparators.OrderItemAsinComparator;
 import com.amazon.ata.deliveringonourpromise.comparators.PromiseAsinComparator;
 import com.amazon.ata.deliveringonourpromise.dao.ReadOnlyDao;
 import com.amazon.ata.deliveringonourpromise.types.Order;
@@ -48,6 +49,7 @@ public class GetPromiseHistoryByOrderIdActivity {
 
         PromiseHistory history = new PromiseHistory(order);
         List<OrderItem> customerOrderItems = order.getCustomerOrderItemList();
+        Collections.sort(customerOrderItems, new OrderItemAsinComparator());
 
         for (OrderItem currentOrderItem : customerOrderItems) {
             OrderItem customerOrderItem = null;
@@ -58,11 +60,10 @@ public class GetPromiseHistoryByOrderIdActivity {
 
             if (customerOrderItem != null) {
                 List<Promise> promises = promiseDao.get(customerOrderItem.getCustomerOrderItemId());
-//                Collections.sort(promises, new PromiseAsinComparator());
+                Collections.sort(promises, new PromiseAsinComparator());
                 for (Promise promise : promises) {
                     promise.setConfidence(customerOrderItem.isConfidenceTracked(), customerOrderItem.getConfidence());
                     history.addPromise(promise);
-                    Collections.sort(history.getPromises(), new PromiseAsinComparator());
                 }
             }
         }

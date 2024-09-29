@@ -108,9 +108,11 @@ public class GetPromiseHistoryByOrderIdActivityTest {
         promiseAsinFirst = promises.get(0).getAsin();
         promiseAsinLast = promises.get(promises.size() - 1).getAsin();
 
-        int result = promiseAsinFirst.compareTo(promiseAsinLast);
+        int resultComparable = promiseAsinFirst.compareTo(promiseAsinLast);
+        int resultComparator = new PromiseAsinComparator().compare(promises.get(0), promises.get(promises.size() - 1));
 
         //THEN
-            assertTrue(result < 0, String.format("Expected %s to be before %s", promiseAsinFirst, promiseAsinLast));
+            assertTrue(resultComparable < 0, String.format("Expected %s to be before %s", promiseAsinFirst, promiseAsinLast));
+            assertTrue(resultComparator < 0, String.format("Expected %s to be before %s", promiseAsinFirst, promiseAsinLast));
     }
 }

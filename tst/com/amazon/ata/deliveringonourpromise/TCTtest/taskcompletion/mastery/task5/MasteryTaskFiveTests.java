@@ -173,10 +173,12 @@ public class MasteryTaskFiveTests {
         // all promises are present
         assertOrdersAndPromisesMatch(order, promises, promiseHistory);
         List<Promise> returnedPromises = promiseHistory.getPromises();
+        String promiseAsinFirst = returnedPromises.get(0).getAsin();
+        String promiseAsinLast = returnedPromises.get(promises.size() - 1).getAsin();
         // promises are in ascending ASIN order.
         assertTrue(Comparators.isInOrder(
             returnedPromises,
-            (x, y) -> x.getAsin().compareTo(y.getAsin()))
+            (x, y) -> x.getAsin().compareTo(y.getAsin())), String.format("%s should be listed before %s", promiseAsinFirst, promiseAsinLast)
         );
     }
 
