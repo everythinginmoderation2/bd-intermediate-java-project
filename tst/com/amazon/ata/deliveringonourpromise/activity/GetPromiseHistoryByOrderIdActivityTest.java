@@ -25,7 +25,7 @@ public class GetPromiseHistoryByOrderIdActivityTest {
     // participants: @BeforeEach means this method is run before each test method is executed, often setting up data +
     // an instance of the class under test.
     @BeforeEach
-    private void createActivity() {
+    public void createActivity() {
         orderDao = App.getOrderDao();
         promiseDao = App.getPromiseDao();
         activity = new GetPromiseHistoryByOrderIdActivity(orderDao, promiseDao);
@@ -44,6 +44,18 @@ public class GetPromiseHistoryByOrderIdActivityTest {
 
         // THEN
         assertEquals(0, history.getPromises().size(), "Expects null order to have no promise history");
+    }
+
+    @Test
+    public void getPromiseHistoryByOrderId_ManyPromisesFromNonNullOrderItems_returnsManyPromisesForEachItem() {
+        //GIVEN
+        String orderId = "900-3746403-0000002";
+
+        // WHEN
+        PromiseHistory history = activity.getPromiseHistoryByOrderId(orderId);
+
+        // THEN
+        assertTrue(history.getPromises().size() > 1, "Expects order with many promises to return many promises");
     }
 
 
