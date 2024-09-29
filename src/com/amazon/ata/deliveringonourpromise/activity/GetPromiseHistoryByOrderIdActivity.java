@@ -1,11 +1,13 @@
 package com.amazon.ata.deliveringonourpromise.activity;
 
+import com.amazon.ata.deliveringonourpromise.comparators.PromiseAsinComparator;
 import com.amazon.ata.deliveringonourpromise.dao.ReadOnlyDao;
 import com.amazon.ata.deliveringonourpromise.types.Order;
 import com.amazon.ata.deliveringonourpromise.types.OrderItem;
 import com.amazon.ata.deliveringonourpromise.types.Promise;
 import com.amazon.ata.deliveringonourpromise.types.PromiseHistory;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -62,7 +64,7 @@ public class GetPromiseHistoryByOrderIdActivity {
                 }
             }
         }
-
+            Collections.sort(history.getPromises(), new PromiseAsinComparator());
             return history;
     }
 }
