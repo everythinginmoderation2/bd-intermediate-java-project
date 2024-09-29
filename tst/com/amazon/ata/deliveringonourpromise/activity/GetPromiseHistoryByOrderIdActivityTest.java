@@ -1,6 +1,7 @@
 package com.amazon.ata.deliveringonourpromise.activity;
 
 import com.amazon.ata.deliveringonourpromise.App;
+import com.amazon.ata.deliveringonourpromise.comparators.PromiseAsinComparator;
 import com.amazon.ata.deliveringonourpromise.dao.ReadOnlyDao;
 import com.amazon.ata.deliveringonourpromise.types.Order;
 import com.amazon.ata.deliveringonourpromise.types.Promise;
@@ -9,6 +10,7 @@ import com.amazon.ata.deliveringonourpromise.types.PromiseHistory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -59,7 +61,6 @@ public class GetPromiseHistoryByOrderIdActivityTest {
     }
 
 
-
     @Test
     public void getPromiseHistoryByOrderId_nullOrderId_isRejected() {
         // GIVEN
@@ -86,10 +87,30 @@ public class GetPromiseHistoryByOrderIdActivityTest {
             }
         }
         assertTrue(foundDpsPromise,
-                   String.format("Expected to find a DPS promise for order ID '%s', but promises were: %s",
-                                 orderId,
-                                 history.getPromises().toString()
-                   )
+                String.format("Expected to find a DPS promise for order ID '%s', but promises were: %s",
+                        orderId,
+                        history.getPromises().toString()
+                )
         );
+    }
+
+    @Test
+    public void getPromiseHistoryByOrderId_withPromiseHistory_returnsPromiseSortedInAscendingOrder() {
+        String orderId = "900-3746403-0000002";
+        String promiseAsinFirst;
+        String promiseAsinLast;
+
+        // WHEN
+        PromiseHistory history = activity.getPromiseHistoryByOrderId(orderId);
+        List<Promise> promises = history.getPromises();
+
+        Collections.sort(promises, new PromiseAsinComparator());
+        promiseAsinFirst = promises.get(0).getAsin();
+        promiseAsinLast = promises.get(promises.size() - 1).getAsin();
+
+        int result = promiseAsinFirst.compareTo(promiseAsinLast);
+
+        //THEN
+            assertTrue(result < 0, String.format("Expected %s to be before %s", promiseAsinFirst, promiseAsinLast));
     }
 }

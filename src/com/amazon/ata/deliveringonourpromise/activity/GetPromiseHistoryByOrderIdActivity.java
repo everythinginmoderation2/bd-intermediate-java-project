@@ -58,13 +58,14 @@ public class GetPromiseHistoryByOrderIdActivity {
 
             if (customerOrderItem != null) {
                 List<Promise> promises = promiseDao.get(customerOrderItem.getCustomerOrderItemId());
+//                Collections.sort(promises, new PromiseAsinComparator());
                 for (Promise promise : promises) {
                     promise.setConfidence(customerOrderItem.isConfidenceTracked(), customerOrderItem.getConfidence());
                     history.addPromise(promise);
+                    Collections.sort(history.getPromises(), new PromiseAsinComparator());
                 }
             }
         }
-            Collections.sort(history.getPromises(), new PromiseAsinComparator());
             return history;
     }
 }
