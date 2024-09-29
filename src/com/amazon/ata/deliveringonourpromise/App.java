@@ -50,8 +50,7 @@ public class App {
         List<PromiseClient> promiseClients = new ArrayList<>();
         promiseClients.add(getDeliveryPromiseServiceClient());
         promiseClients.add(getOrderFulfillmentServiceClient());
-        return new PromiseDao(getOrderManipulationAuthorityClient(), promiseClients
-        );
+        return new PromiseDao(getOrderManipulationAuthorityClient(), promiseClients);
     }
 
     // service clients

@@ -10,8 +10,10 @@ interface ReadOnlyDao
     +PromiseDao getPromiseDao()
     +OrderManipulationAuthorityClient getOrderManipulationAuthorityClient()
     +DeliveryPromiseServiceClient getDeliveryPromiseServiceClient()
+    +OrderFulfillmentServiceClient getOrderFulfillmentServiceClient()
     +OrderManipulationAuthority getOrderManipulationAuthority()
     +DeliveryPromiseService getDeliveryPromiseService()
+    +OrderFulfillmentService getOrderFulfillmentService()
     +OrderDatastore getOrderDatastore()
 }
 
